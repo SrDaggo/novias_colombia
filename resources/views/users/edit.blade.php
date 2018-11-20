@@ -4,7 +4,7 @@
 
 @if($errors->any())
 <div class="alert alert-danger">
-    <h3 class="alert-heading">Corrige estos errores para continuar</h3>
+    <h3 class="">Corrige estos errores para continuar</h3>
     <ul>
         @foreach($errors->all() as $errors)
         <li>{{ $errors }}</li>
