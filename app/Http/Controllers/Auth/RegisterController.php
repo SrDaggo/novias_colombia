@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Departamento;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -87,8 +87,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        $departamentos = DB::table('departamentos')->orderBy('departamento', 'asc')->get();
-
+        $departamentos = Departamento::All();
 
         return view('auth.register', compact('departamentos'));
     }

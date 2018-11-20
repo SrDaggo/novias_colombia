@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Departamento;
+use App\Municipio;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -39,8 +40,9 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $municipios = DB::table('municipios')->get();
-        return view('users.edit', compact('user', 'municipios'));
+        $departamentos = Departamento::all();
+        $municipios = Municipio::all();
+        return view('users.edit', compact('user', 'departamentos', 'municipios'));
     }
 
     /**
@@ -62,10 +64,13 @@ class UsersController extends Controller
                 'partner_name' => 'nullable|min:2|max:100',
                 'marrige_date' => 'required|date',
                 'expected_guests' => 'nullable|min:1|integer',
+
+                'wedding_municipio_id' => 'nullable|integer|between:1,1091',
                 'wedding_hour_start' => 'nullable|integer|between:0,23',
                 'wedding_minute_start' => 'nullable|integer|between:0,59',
                 'wedding_hour_finish' => 'nullable|integer|between:0,23',
                 'wedding_minute_finish' => 'nullable|integer|between:0,59',
+                'about_my_marrige' => 'nullable|min:10',
                 //MOSCA CON ESTOS, AUN ESTAN POR MODIFICARSE
                 'wedding_color' => 'nullable|string|in:white,blue,yellow',
                 'wedding_style' => 'nullable|string|in:night,modern,elegant,beach',

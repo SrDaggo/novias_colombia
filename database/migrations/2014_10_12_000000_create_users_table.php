@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
 
             //GENERAL DATA
             $table->string('avatar')->nullable();
-            $table->integer('phone')->nullable();
+            $table->bigInteger('phone')->nullable();
             $table->string('about_me')->nullable();
 
             //PARTNER DATA
@@ -42,8 +42,8 @@ class CreateUsersTable extends Migration
 
             //MY MARRIGE
             $table->integer('expected_guests')->nullable();
-            $table->unsignedInteger('wedding_departamento')->nullable();
-            $table->unsignedInteger('wedding_municipio')->nullable();
+
+            $table->unsignedInteger('wedding_municipio_id')->nullable();
             $table->string('about_my_marrige')->nullable();
             $table->integer('wedding_hour_start')->nullable();
             $table->integer('wedding_minute_start')->nullable();
@@ -53,8 +53,8 @@ class CreateUsersTable extends Migration
             //RELATIONSHIPS
             $table->foreign('departamento_id')->references('id_departamento')->on('departamentos');
             $table->foreign('municipio_id')->references('id_municipio')->on('municipios');
-            $table->foreign('wedding_departamento')->references('id_departamento')->on('departamentos');
-            $table->foreign('wedding_municipio')->references('id_municipio')->on('municipios');
+
+            $table->foreign('wedding_municipio_id')->references('id_municipio')->on('municipios');
 
             $table->rememberToken();
             $table->timestamps();

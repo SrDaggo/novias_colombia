@@ -24,9 +24,12 @@ class User extends Authenticatable
         'municipio_id',
         'phone',
         'about_me',
+        'about_my_marrige',
         'partner_name',
         'partner_gender',
         'expected_guests',
+
+        'wedding_municipio_id',
         'wedding_hour_start',
         'wedding_minute_start',
         'wedding_hour_finish',
@@ -60,13 +63,9 @@ class User extends Authenticatable
         return $this->belongsTo('App\Municipio', 'municipio_id', 'id_municipio');
     }
 
-    public function wedding_departamento()
-    {
-        return $this->belongsTo('App\Departamento', 'wedding_departamento', 'id_departamento');
-    }
     public function wedding_municipio()
     {
-        return $this->belongsTo('App\Municipio', 'wedding_municipio', 'id_municipio');
+        return $this->belongsTo('App\Municipio', 'wedding_municipio_id', 'id_municipio');
     }
 
 }
