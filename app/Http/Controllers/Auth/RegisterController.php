@@ -88,9 +88,9 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         $departamentos = DB::table('departamentos')->orderBy('departamento', 'asc')->get();
-        $municipios = DB::table('municipios')->orderBy('municipio', 'asc')->get();
 
-        return view('auth.register', compact('departamentos', 'municipios'));
+
+        return view('auth.register', compact('departamentos'));
     }
 
 }

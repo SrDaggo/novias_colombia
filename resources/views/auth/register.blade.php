@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.base-login')
 
 @section('content')
 
@@ -92,11 +92,12 @@
     <button type="submit" class="">
         Registrarse
     </button>
-
+    <br>
+    <a href="{{ route('login') }}">¿Ya tienes una cuenta?</a>
 </form>
 
 @endsection
 
-@section('scripts')
+@section('aditional_scripts')
 <script src="{{ asset('js/depending_selectors.js') }}"></script>
 @endsection
