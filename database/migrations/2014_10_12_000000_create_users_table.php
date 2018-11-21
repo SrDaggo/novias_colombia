@@ -53,7 +53,6 @@ class CreateUsersTable extends Migration
             //RELATIONSHIPS
             $table->foreign('departamento_id')->references('id_departamento')->on('departamentos');
             $table->foreign('municipio_id')->references('id_municipio')->on('municipios');
-
             $table->foreign('wedding_municipio_id')->references('id_municipio')->on('municipios');
 
             $table->rememberToken();
