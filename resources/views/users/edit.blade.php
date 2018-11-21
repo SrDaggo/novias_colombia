@@ -3,19 +3,19 @@
 @section('content')
 
 @if($errors->any())
-<div class="alert alert-danger">
-    <h3 class="">Corrige estos errores para continuar</h3>
-    <ul>
-        @foreach($errors->all() as $errors)
-        <li>{{ $errors }}</li>
-        @endforeach
-    </ul>
-</div>
+
+<h3 class="">Corrige estos errores para continuar</h3>
+<ul>
+    @foreach($errors->all() as $errors)
+    <li>{{ $errors }}</li>
+    @endforeach
+</ul>
+
 @endif
 
 
 <h3>Datos Personales</h3>
-<form action="{{ url('/user/'.$user->id) }}" method="POST">
+<form action="{{ route('user.update',$user->id) }}" method="POST">
     {{ method_field('PUT') }}
     @csrf
     <label for="name">Nombre y Apellido</label>
