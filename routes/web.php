@@ -14,37 +14,45 @@
 Route::view('/', 'home');
 
 Auth::routes();
-Route::resource('user', 'UsersController', ['only' => ['show', 'edit', 'update']]);
-/**
- * POST /user => store
- * GET /user/create => create
- * GET /user/id => show
- * GET / user/id/edit => edit
- * PUT/PATCH /user/id => update
- * DELETE /user/id =>delete
- */
-Route::resource('task', 'TasksController', ['except' => 'create', 'show']);
-/**
- * GET /task => index
- * POST /task => store
- * GET / task/id/edit => edit
- * PUT/PATCH /task/id => update
- * DELETE /task/id =>delete
- */
-Route::resource('taskCategory', 'TaskCategoriesController', ['except' => 'create', 'show']);
-/**
- * GET /taskCategory => index
- * POST /taskCategory => store
- * GET / taskCategory/id/edit => edit
- * PUT/PATCH /taskCategory/id => update
- * DELETE /taskCategory/id =>delete
- */
-Route::resource('taskDate', 'TaskDatesController', ['except' => 'create', 'show']);
-/**
- * GET /taskCategory => index
- * POST /taskCategory => store
- * GET / taskCategory/id/edit => edit
- * PUT/PATCH /taskCategory/id => update
- * DELETE /taskCategory/id =>delete
- */
+
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('user', 'UsersController', ['only' => ['show', 'edit', 'update']]);
+    /**
+     * POST /user => store
+     * GET /user/create => create
+     * GET /user/id => show
+     * GET / user/id/edit => edit
+     * PUT/PATCH /user/id => update
+     * DELETE /user/id =>delete
+     */
+
+    Route::resource('task', 'TasksController', ['except' => 'create', 'show']);
+    /**
+     * GET /task => index
+     * POST /task => store
+     * GET / task/id/edit => edit
+     * PUT/PATCH /task/id => update
+     * DELETE /task/id =>delete
+     */
+});
+
+Route::group(['middleware' => ['admin']], function () {
+    Route::resource('taskCategory', 'TaskCategoriesController', ['except' => 'create', 'show']);
+    /**
+     * GET /taskCategory => index
+     * POST /taskCategory => store
+     * GET / taskCategory/id/edit => edit
+     * PUT/PATCH /taskCategory/id => update
+     * DELETE /taskCategory/id =>delete
+     */
+    Route::resource('taskDate', 'TaskDatesController', ['except' => 'create', 'show']);
+    /**
+     * GET /taskCategory => index
+     * POST /taskCategory => store
+     * GET / taskCategory/id/edit => edit
+     * PUT/PATCH /taskCategory/id => update
+     * DELETE /taskCategory/id =>delete
+     */
+});

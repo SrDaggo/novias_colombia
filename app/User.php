@@ -52,6 +52,15 @@ class User extends Authenticatable
 
     //Accessors and Mutators
 
+    public function getIsAdminAttribute()
+    {
+        return $this->role == 0;
+    }
+    public function getIsUserAttribute()
+    {
+        return $this->role == 1;
+    }
+
     //Relationships
 
     public function departamento()

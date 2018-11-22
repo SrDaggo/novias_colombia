@@ -21,5 +21,16 @@ class UsersTableSeeder extends Seeder
             'departamento_id' => '11',
             'municipio_id' => '107',
         ]);
+
+        User::create([
+            'name' => 'Admin',
+            'role' => 0,
+            'email' => 'admin@dev.com',
+            'password' => bcrypt('123456'),
+            'marrige_date' => '2018-11-02',
+            'gender' => 'male',
+            'departamento_id' => '11',
+            'municipio_id' => '107',
+        ]);
     }
 }

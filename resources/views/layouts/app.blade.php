@@ -45,9 +45,6 @@ document.getElementById('logout-form').submit();">
 
         <a href="{{ route('task.index') }}">Tareas</a>
 
-        {{-- FALTA MIDDLEWARE --}}
-        {{-- <a href="{{ route('taskCategory.index') }}">editar categorias</a>
-        <a href="{{ route('taskDate.index') }}">editar fechas de inicio</a> --}}
 
         @endauth
 
