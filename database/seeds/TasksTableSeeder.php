@@ -18,7 +18,8 @@ class TasksTableSeeder extends Seeder
                 'description' => 'tengo que conseguir Ace para lavar',
                 'user_id' => 1,
                 'category_id' => 1,
-                'date_id' => 1,
+                'start_date' => '2018-11-02',
+                'finish_date' => '2018-11-30',
             ]);
 
     }

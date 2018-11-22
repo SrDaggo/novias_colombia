@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Task;
 use App\TaskCategory;
-use App\TaskDate;
 use Illuminate\Http\Request;
 
 class TasksController extends Controller
@@ -17,9 +16,11 @@ class TasksController extends Controller
     public function index()
     {
         $task_categories = TaskCategory::all();
-        $task_dates = TaskDate::all();
-        $tasks = Task::where('user_id', auth()->user()->id)->get();
-        return view('tasks.index', compact('tasks', 'task_categories', 'task_dates'));
+
+        $tasks_completed = Task::where('status', 1)->get();
+        $tasks_incompleted = Task::where('status', 0)->get();
+
+        return view('tasks.index', compact('task_categories', 'tasks_completed', 'tasks_incompleted'));
     }
 
     /**
@@ -45,14 +46,17 @@ class TasksController extends Controller
                 'title' => 'required|string|min:3|max:120',
                 'description' => 'nullable|string',
                 'task_category' => 'required|exists:task_categories,id',
-                'task_date' => 'required|exists:task_dates,id',
+                'start_date' => 'required|date',
+                'finish_date' => 'required|date',
+
             ]
         );
         Task::create([
             'title' => $data['title'],
             'description' => $data['description'],
             'category_id' => $data['task_category'],
-            'date_id' => $data['task_date'],
+            'start_date' => $data['start_date'],
+            'finish_date' => $data['finish_date'],
             'user_id' => auth()->user()->id,
         ]);
         return redirect()->route('task.index');
@@ -80,8 +84,8 @@ class TasksController extends Controller
     {
         $task = Task::find($id);
         $task_categories = TaskCategory::all();
-        $task_dates = TaskDate::all();
-        return view('tasks.edit', compact('task', 'task_categories', 'task_dates'));
+
+        return view('tasks.edit', compact('task', 'task_categories'));
 
     }
 
@@ -99,7 +103,8 @@ class TasksController extends Controller
                 'title' => 'required|string|min:3|max:120',
                 'description' => 'nullable|string',
                 'category_id' => 'required|exists:task_categories,id',
-                'date_id' => 'required|exists:task_dates,id',
+                'start_date' => 'required|date',
+                'finish_date' => 'required|date',
                 'note' => 'nullable|string',
             ]);
 
@@ -120,6 +125,18 @@ class TasksController extends Controller
     {
         $task = Task::find($id);
         $task->delete();
+        return redirect()->route('task.index');
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $task = Task::find($id);
+        $data = request()->validate([
+            'status' => 'required|integer|between:0,1',
+        ]);
+
+        $task->update($data);
+
         return redirect()->route('task.index');
     }
 }

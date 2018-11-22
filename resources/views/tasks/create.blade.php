@@ -27,13 +27,13 @@
     </select>
     <br>
 
-    <select name="task_date" required>
-        <option value="">Fecha de Inicio</option>
-        @foreach ($task_dates as $task_date)
-        <option value="{{ $task_date->id }}">{{ $task_date->name }}</option>
-        @endforeach
-    </select>
+    <label for="start_date">Fecha de inicio</label>
+    <input type="date" name="start_date" value="{{ old('start_date') }}">
     <br>
+    <label for="finish_date">Fecha de finalización</label>
+    <input type="date" name="finish_date" value="{{ old('finish_date') }}">
+    <br>
+
 
     <button type="submit">Crear</button>
 

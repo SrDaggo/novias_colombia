@@ -19,14 +19,15 @@ class CreateTasksTable extends Migration
             $table->string('title');
             $table->string('description')->nullable();
             $table->string('note')->nullable();
-            $table->string('status')->default('incomplete');
+            $table->integer('status')->default(0); //0 INCOMPLETE - 1 COMPLETE
             $table->unsignedInteger('category_id');
-            $table->unsignedInteger('date_id');
+            $table->date('start_date')->nullable();
+            $table->date('finish_date')->nullable();
 
             //relationships
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('category_id')->references('id')->on('task_categories');
-            $table->foreign('date_id')->references('id')->on('task_dates');
+
             $table->timestamps();
         });
     }

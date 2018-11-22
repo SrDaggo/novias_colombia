@@ -16,6 +16,7 @@ Route::view('/', 'home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::put('/task/{id}/update_status', 'TasksController@updateStatus')->name('task.update_status')->middleware('auth');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('user', 'UsersController', ['only' => ['show', 'edit', 'update']]);
@@ -47,12 +48,5 @@ Route::group(['middleware' => ['admin']], function () {
      * PUT/PATCH /taskCategory/id => update
      * DELETE /taskCategory/id =>delete
      */
-    Route::resource('taskDate', 'TaskDatesController', ['except' => 'create', 'show']);
-    /**
-     * GET /taskCategory => index
-     * POST /taskCategory => store
-     * GET / taskCategory/id/edit => edit
-     * PUT/PATCH /taskCategory/id => update
-     * DELETE /taskCategory/id =>delete
-     */
+
 });

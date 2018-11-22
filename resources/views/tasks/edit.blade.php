@@ -30,13 +30,13 @@
         @endforeach
     </select>
     <br>
+    <label for="start_date">Fecha de inicio</label>
+    <input type="date" name="start_date" value="{{ old('start_date',$task->start_date) }}">
+    <br>
+    <label for="finish_date">Fecha de finalización</label>
+    <input type="date" name="finish_date" value="{{ old('finish_date',$task->finish_date) }}">
+    <br>
 
-    <select name="date_id" id="select-task-date" required>
-        <option value="">Fecha de Inicio</option>
-        @foreach ($task_dates as $task_date)
-        <option value="{{ $task_date->id }}">{{ $task_date->name }}</option>
-        @endforeach
-    </select>
     <br>
 
 
@@ -57,12 +57,7 @@
     function preselected_items() {
         var category = '<?php echo $task->category_id; ?>';
         var select_task_category = document.getElementById('select-task-category');
-        var date = '<?php echo $task->date_id; ?>';
-        var select_task_date = document.getElementById('select-task-date');
-
         select_task_category.value = category;
-        select_task_date.value = date;
-
     }
     window.addEventListener('load', preselected_items)
 
